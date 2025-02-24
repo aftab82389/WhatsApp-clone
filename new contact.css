@@ -1,0 +1,59 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+body {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: #494747;
+    color: #e7e9eb;
+}
+
+.main {
+    padding: 10px;
+}
+.header{
+    display: flex;
+    gap:10px
+}
+.contact{
+    display:flex;
+    gap:10px;
+    margin-top: 30px;
+}
+label{
+    font-size: 12px;
+}
+#fname,#lname{
+    width:100%;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #0bce3b;
+    margin: 5px 0px;
+}
+.no{
+    width: 100%;
+}
+#phone{
+    width:100%;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #0bce3b;
+}
+.phone{
+    display:flex;
+    gap:10px;
+    margin-top: 30px;
+}
+#save{
+    margin-top: 30px;
+    width:100%;
+    height:30px;
+    background:#0bce3b;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+}
