@@ -1,4 +1,3 @@
-<script type="module">
         const fname = document.querySelector('#fname');
         const lname = document.querySelector('#lname');
         const phone = document.querySelector('#phone');
@@ -39,6 +38,3 @@
         save.addEventListener('click', () => {
             saveData();
         })
-        // Import 
-    
-    </script>
