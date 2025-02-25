@@ -24,6 +24,7 @@
   })
   .then(()=>{
     alert('succesful');
+    console.log(fname,lname,phone);
   })
   .catch((error)=>{
     alert(error)
