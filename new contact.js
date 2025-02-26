@@ -1,6 +1,6 @@
-        const fname = document.querySelector('#fname').value;
-        const lname = document.querySelector('#lname').value;
-        const phone = document.querySelector('#phone').value;
+        const fname = document.querySelector('#fname');
+        const lname = document.querySelector('#lname');
+        const phone = document.querySelector('#phone');
         const save = document.querySelector('#save');
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
   const firebaseConfig = {
@@ -17,14 +17,13 @@
   from "https://www.gstatic.com/firebasejs/11.3.1/firebase-database.js";
   const db = getDatabase();
   function insert(){
-  set(ref(db,"whatsapp-"+ phone),{
-    Fname : fname,
-    Lname : lname,
-    Phone : phone
+  set(ref(db,"whatsapp-"+ phone.value),{
+    Fname : fname.value,
+    Lname : lname.value,
+    Phone : phone.value
   })
   .then(()=>{
     alert('succesful');
-    console.log(fname,lname,phone);
   })
   .catch((error)=>{
     alert(error)
