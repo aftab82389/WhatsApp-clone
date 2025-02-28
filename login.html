@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            background: #222;
+            color: #ffd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            width: 90%;
+            height: 90vh;
+            background: linear-gradient(to bottom, #000000, #8248DB, #9416FF);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            border-radius: 5px;
+            background: linear-gradient(#FF39DC, #5039FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            box-shadow: 0px 0px 20px 10px #000000;
+        }
+
+        .container {
+            margin-top: 40px;
+            width: calc(100% -10px);
+            height: auto;
+            box-shadow: 0px 0px 3px 1px #D9D9D9;
+            padding: 10px;
+            text-align: center;
+            border-radius: 50px;
+            background: linear-gradient(to top, #000000, #8248DB, #9416FF);
+        }
+
+        label {
+            font-size: 23px;
+
+            background: linear-gradient(#72FF1C, #3AD8FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        input {
+            width: 100%;
+            height: 40px;
+            margin: 5px 0px 30px 0px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 20px;
+            text-align: center;
+            color: #37FF21;
+            box-shadow: 0px 0px 1px 1px #DAD5D5, 5px 5px 10px #DAD5D5;
+        }
+
+        .otpbtn {
+            width: 100%;
+            height: 40px;
+            border-radius: 50px;
+            border: none;
+            color: #aaa;
+            background: linear-gradient(#FF004E, #000284);
+            box-shadow: 3px 6px 4px #010222, -3px -6px 30px 0px #CFCFCF;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        #otp {
+            width: 60%;
+            text-align: center;
+            font-size: 20px;
+            color: #BAB6FF
+        }
+
+        #verify {
+            width: 35%;
+            height: 40px;
+            border-radius: 50px;
+            border: none;
+            background: #3129AC;
+            color: #CECCF0;
+            font-size: 20px;
+        }
+
+        #login {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 30px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            background: linear-gradient(#CCFF00, #1518E9);
+            box-shadow: 3px 6px 4px #010222, -5px -5px 25px 0px #9B9B9B;
+            color: #23FF00;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <h1>Login Account </h1>
+        </div>
+        <div class="container">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name"></input>
+            <label for="phone">Mobile no.</label>
+            <input type="number" name="phone" id="phone"></input>
+            <div id="recaptcha"> </div>
+            <button class="otpbtn">Send OTP</button>
+            <input type="number" name="otp" id="otp" placeholder="ENTER OTP" maxlength="6">
+            <button id="verify">Verify</button>
+            <button id="login">Login</button>
+        </div>
+    </div>
+    <script type="module">
+        const name=document.querySelector('#name');
+        const phone=document.querySelector('#phone');
+        const login=document.querySelector('#login');
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDBatjj-Nojhhfhk_d6VAVgtfTLupLwyQw",
+    authDomain: "whatsapp-clone-29b9a.firebaseapp.com",
+    databaseURL: "https://whatsapp-clone-29b9a-default-rtdb.firebaseio.com",
+    projectId: "whatsapp-clone-29b9a",
+    storageBucket: "whatsapp-clone-29b9a.firebasestorage.app",
+    messagingSenderId: "513887418951",
+    appId: "1:513887418951:web:769a1daba2795214c04f62"
+  };
+  const app = initializeApp(firebaseConfig);
+  import { getDatabase, ref, set, child, update, remove } 
+  from "https://www.gstatic.com/firebasejs/11.3.1/firebase-database.js";
+  const db = getDatabase();
+  function insert(){
+  set(ref(db,"whatsapp-"+ phone.value),{
+    Name : name.value,
+    Phone : phone.value
+  })
+  .then(()=>{
+    alert('succesful');
+    window.location="index.html";
+  })
+  .catch((error)=>{
+    alert(error)
+  })
+  }
+  function loginId(){
+    if((name.value!="") && (phone.value!="") ){
+        insert();   
+        _name=name.value;   
+        
+    }
+    else{
+        alert('Complete field');
+    }
+  }
+  login.addEventListener('click',()=>{
+    loginId()
+  })
+  export {_name}
+    </script>
+</body>
+
+</html>
