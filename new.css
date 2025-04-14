@@ -20,7 +20,9 @@ body {
     justify-content: space-between;
     padding: 10px 0px;
 }
-
+.header>i{
+  font-size: 22px;
+}
 .newCont {
     display: flex;
     justify-content: left;
