@@ -28,9 +28,9 @@ function fetchAllReviews() {
   onValue(reviewsRef, (snapshot) => {
     if (snapshot.exists()) {
       data = snapshot.val();
-      console.log('Data fetched:', data);
+      
     } else {
-      console.log('No contacts found');
+      alert('No contacts found');
     }
   });
 }
@@ -41,7 +41,7 @@ fetchAllReviews();
 function Login() {
   window.location = "index.html"; 
   localStorage.setItem("Phone",phone.value);
-  console.log(localStorage.getItem("Phone"))// Redirect to index.html on successful login
+  // Redirect to index.html on successful login
 }
 
 // Event Listener for Login Button
@@ -50,7 +50,7 @@ login.addEventListener('click', () => {
   const passValue = password.value.trim();
 
   if (!phoneValue || !passValue) {
-    console.log("Please fill out both fields.");
+    alert("Please fill out both fields.");
     return;
   }
 
@@ -59,12 +59,11 @@ login.addEventListener('click', () => {
   Object.keys(data).forEach((key) => {
     if (data[key].Phone === phoneValue && data[key].Password === passValue) {
       userFound = true;
-      console.log(`User Found: ${data[key].Name}`);
       Login();
     }
   });
 
   if (!userFound) {
-    console.log('Incorrect phone number or password.');
+    alert('Incorrect phone number or password.');
   }
 });
