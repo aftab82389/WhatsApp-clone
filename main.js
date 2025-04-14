@@ -88,6 +88,7 @@ function fetchAllContacts() {
   const phone = localStorage.getItem("Phone");
   if (!phone) {
     profiles.innerHTML = "<p style='color:white; text-align:center;'>User not logged in</p>";
+    window.location="login.html";
     return;
   }
 
