@@ -1,0 +1,114 @@
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+    
+    body {
+      width: 100%;
+      height: 100vh;
+      box-sizing: border-box;
+      background: #222;
+      color: #ffd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .main {
+      width: 90%;
+      height: 90vh;
+      background: linear-gradient(to bottom, #000000, #8248DB, #9416FF);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      border-radius: 5px;
+      background: linear-gradient(#FF39DC, #5039FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      box-shadow: 0px 0px 20px 10px #000000;
+    }
+    
+    .container {
+      margin-top: 40px;
+      width: calc(100% -10px);
+      height: auto;
+      box-shadow: 0px 0px 3px 1px #D9D9D9;
+      padding: 10px;
+      text-align: center;
+      border-radius: 50px;
+      background: linear-gradient(to top, #000000, #8248DB, #9416FF);
+    }
+    
+    label {
+      font-size: 23px;
+      
+      background: linear-gradient(#72FF1C, #3AD8FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(3px 1px #3B3A3A);
+    }
+    
+    input {
+      width: 100%;
+      height: 40px;
+      margin: 5px 0px 30px 0px;
+      border-radius: 50px;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 20px;
+      text-align: center;
+      color: #FFFFFF;
+      box-shadow: 0px 0px 1px 1px #DAD5D5, 10px 10px 5px #262626;
+    }
+    
+    .otpbtn {
+      width: 100%;
+      height: 40px;
+      border-radius: 50px;
+      border: none;
+      color: #aaa;
+      background: linear-gradient(#FF004E, #000284);
+      box-shadow: 3px 6px 4px #010222, -3px -6px 30px 0px #CFCFCF;
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    
+    #otp {
+      width: 60%;
+      text-align: center;
+      font-size: 20px;
+      color: #BAB6FF
+    }
+    
+    #verify {
+      width: 35%;
+      height: 40px;
+      border-radius: 50px;
+      border: none;
+      background: #3129AC;
+      color: #CECCF0;
+      font-size: 20px;
+    }
+    
+    #login {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 10px;
+      border-radius: 50px;
+      border: none;
+      outline: none;
+      background: linear-gradient(#CCFF00, #1518E9);
+      box-shadow: 3px 6px 4px #010222, -5px -5px 25px 0px #9B9B9B;
+      color: #23FF00;
+      font-size: 20px;
+    }
+    
+    a {
+      font-size: 18px;
+      text-decoration: none;
+      color: #5B69FF;
+      }
