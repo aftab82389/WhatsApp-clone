@@ -48,23 +48,36 @@ function insert() {
     alert(error.message);
   });
 }
-
+function contactValidation(){
+  if(phone.value.length ==10){
+  const validate=ref(db,"Accounts/"+phone.value);
+  onValue(validate,(snapshot)=> {
+    if(snapshot.exists()){
+      const data=snapshot.val()
+      console.log(data.Phone,"found")
+    }
+    else{
+      console.log("not found")
+    }
+  })
+}
+}
+phone.addEventListener('input',()=>{
+  contactValidation()
+})
 // Fetch all contacts
 function fetchAllReviews() {
   const reviewsRef = ref(db, "Accounts/"+localStorage.getItem("Phone")+"/Contact/"+phone.value);
 
   // Listen for real-time updates
   onValue(reviewsRef, (snapshot) => {
-    contactList.innerHTML = ""; // Clear list to prevent duplicates
-
+    contactList.innerHTML = ""; 
     if (snapshot.exists()) {
       const data = snapshot.val();
-      
-      
+      console.log(snapshot.val())
+      console.log(data.Phone)
       Object.keys(data).forEach((key) => {
         const { Fname, Lname ,Phone} = data[key];
-
-        // Create a contact item
         chats(Fname + " " + Lname,Phone);
         console.log(Phone)
       });
@@ -108,5 +121,5 @@ save.addEventListener('click', () => {
 // Fetch contacts on page load
 fetchAllReviews();
 document.querySelector('.ri-arrow-left-line').addEventListener('click',()=>{
-  window.location="new.html"
+  window.location="index.html"
 })
