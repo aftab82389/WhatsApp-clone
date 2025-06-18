@@ -1,11 +1,29 @@
 // Create and append container for profiles
 let profiles = document.createElement('div');
 profiles.className = 'profiles-container';
-document.body.appendChild(profiles);
-
+let mainDiv=document.querySelector('.main');
+mainDiv.appendChild(profiles);
+let searchbar=document.querySelector('#searchbar');
 // Store names in array (optional)
 let nameObject = [];
-
+let user=document.querySelector('#userName');
+let logoutDiv=document.querySelector('#logOut');
+let logout=document.querySelector('.ri-shut-down-line');
+logout.addEventListener('click',() =>{
+  mainDiv.style.display="none";
+  logoutDiv.style.display="flex";
+})
+let yes=document.querySelector('#yes');
+let no=document.querySelector('#no');
+yes.addEventListener('click',() =>{
+  localStorage.setItem("Phone","")
+  localStorage.setItem("Friend","");
+  window.location="login.html"
+})
+no.addEventListener('click',() =>{
+  mainDiv.style.display="block";
+  logoutDiv.style.display="none";
+})
 // Function to create a profile dynamically
 function createProfile(Fname, Lname, Phone) {
   let profile = document.createElement('div');
@@ -41,14 +59,13 @@ function createProfile(Fname, Lname, Phone) {
 
   profiles.appendChild(profile);
   nameObject.push(name.innerText);
-  console.log(name.innerText, nameObject);
 }
 
 // Button for adding new contact
 const create = document.querySelector('.new');
 if (create) {
   create.addEventListener('click', () => {
-    window.location = "new.html";
+    window.location = "new contact.html";
     console.log("Redirecting to new contact page...");
   });
 }
@@ -78,14 +95,21 @@ const firebaseConfig = {
   messagingSenderId: "513887418951",
   appId: "1:513887418951:web:769a1daba2795214c04f62"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const phone = localStorage.getItem("Phone");
 
+function getuserName(){
+  const userRef=ref(db, "Accounts/" + phone + "/Name");
+    onValue(userRef, (snapshot) =>{
+      const userName=snapshot.val();
+      user.innerHTML=userName;
+    })
+}
+getuserName();
 // Fetch and display all contacts
 function fetchAllContacts() {
-  const phone = localStorage.getItem("Phone");
   if (!phone) {
     profiles.innerHTML = "<p style='color:white; text-align:center;'>User not logged in</p>";
     window.location="login.html";
@@ -111,3 +135,20 @@ function fetchAllContacts() {
 
 // Call on page load
 fetchAllContacts();
+
+// Activate search bar functionality
+searchbar.addEventListener('input', (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  const allProfiles = document.querySelectorAll('.profile');
+  
+  allProfiles.forEach(profile => {
+    const nameElement = profile.querySelector('.name');
+    const name = nameElement.textContent.toLowerCase();
+    
+    if (name.includes(searchTerm)) {
+      profile.style.display = 'flex'; // Show matching profiles
+    } else {
+      profile.style.display = 'none'; // Hide non-matching profiles
+    }
+  });
+});
