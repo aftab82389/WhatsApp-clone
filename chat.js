@@ -115,7 +115,25 @@ function formatLastSeenTime(timestamp) {
     return date.toLocaleDateString();
   }
 }
+// When user is typing
+chatbox.addEventListener('input', () => {
+  set(ref(db, `Accounts/${myPhone}/typingTo/${friendPhone}`), true);
+  // Clear after 2 seconds of inactivity
+  clearTimeout(window.typingTimeout);
+  window.typingTimeout = setTimeout(() => {
+    set(ref(db, `Accounts/${myPhone}/typingTo/${friendPhone}`), false);
+  }, 2000);
+});
 
+// Listen for friend's typing
+const typingRef = ref(db, `Accounts/${friendPhone}/typingTo/${myPhone}`);
+onValue(typingRef, (snapshot) => {
+  if (snapshot.val()) {
+    // Show "typing..." indicator
+  } else {
+    // Hide indicator
+  }
+});
 // Format date header (e.g., "Today", "Yesterday", or specific date)
 function formatDateHeader(timestamp) {
   const date = new Date(timestamp);
