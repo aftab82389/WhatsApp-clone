@@ -75,8 +75,18 @@ function monitorFriendStatus(friendPhone) {
     const status = snapshot.val();
     if (status) {
       if (status.online) {
-        onlineStatusEl.textContent = "Online";
-        onlineStatusEl.style.color = "green";
+        // Listen for friend's typing
+        const typingRef = ref(db, `Accounts/${friendPhone}/typingTo/${myPhone}`);
+        onValue(typingRef, (snapshot) => {
+          if (snapshot.val()) {
+            onlineStatusEl.textContent="typing";
+          }
+          else {
+            onlineStatusEl.textContent = "Online";
+          }
+  });
+        
+        onlineStatusEl.style.color = "#0f0";
       } else {
         if (status.lastSeen) {
           const lastSeenDate = new Date(status.lastSeen);
@@ -125,15 +135,6 @@ chatbox.addEventListener('input', () => {
   }, 2000);
 });
 
-// Listen for friend's typing
-const typingRef = ref(db, `Accounts/${friendPhone}/typingTo/${myPhone}`);
-onValue(typingRef, (snapshot) => {
-  if (snapshot.val()) {
-    // Show "typing..." indicator
-  } else {
-    // Hide indicator
-  }
-});
 // Format date header (e.g., "Today", "Yesterday", or specific date)
 function formatDateHeader(timestamp) {
   const date = new Date(timestamp);
