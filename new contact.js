@@ -24,7 +24,7 @@ const db = getDatabase(app);
 
 // Validation function
 function validation() {
-  if (!fname.value || !lname.value || !phone.value) {
+  if (!fname.value || !phone.value) {
     alert('Please fill in all fields.');
     return false;
   }
