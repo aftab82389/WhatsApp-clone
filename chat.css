@@ -48,7 +48,14 @@
       border-radius: 10px;
       width:60%;   
     }
-    
+    @media screen and (max-width:390px) {
+      .chat-container{
+        width: 100%;
+      }
+      #messages {
+        width: 100%;
+      }
+    }
     #messages {
       display: flex;
       flex-direction: column;
@@ -144,10 +151,3 @@
   margin-left: 10px;
 }
 .date-header {
-  text-align: center;
-  margin: 5px 0;
-  color: #d6d5d5;
-  font-size: 0.8em;
-  position: relative;
-}
-
