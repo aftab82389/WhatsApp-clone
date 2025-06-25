@@ -250,4 +250,24 @@ function listenForMessages(friend) {
 
 // Send button click
 sendBtn.addEventListener("click", () => {
-  
+  const msg = chatbox.value.trim();
+  if (msg && friendPhone) {
+    insertMessage(friendPhone, msg);
+    chatbox.value = "";
+  }
+});
+
+// Enter key sends message
+chatbox.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    sendBtn.click();
+  }
+});
+
+// On page load
+window.onload = () => {
+  setupPresence();
+  monitorFriendStatus(friendPhone);
+  listenForMessages(friendPhone);
+  friendNameFinder();
+};
