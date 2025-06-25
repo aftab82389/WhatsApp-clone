@@ -49,7 +49,7 @@ function createProfile(Fname, Lname, Phone) {
 
   let t_msg = document.createElement('p');
   t_msg.className = 't_msg';
-  t_msg.innerHTML = 'Hi!'; // Optional: Replace with last message from DB
+  t_msg.innerHTML = ''; // Optional: Replace with last message from DB
   subtitle.appendChild(t_msg);
 
   let l_seen = document.createElement('p');
@@ -59,6 +59,7 @@ function createProfile(Fname, Lname, Phone) {
 
   profiles.appendChild(profile);
   nameObject.push(name.innerText);
+  lmsg(Phone,t_msg,l_seen)
 }
 
 // Button for adding new contact
@@ -126,15 +127,40 @@ function fetchAllContacts() {
       Object.keys(data).forEach((key) => {
         const { Fname, Lname, Phone } = data[key];
         createProfile(Fname, Lname, Phone);
+        
       });
-    } else {
-      profiles.innerHTML = "<p style='color:white; text-align:center;'>No contacts found</p>";
+    } 
+    else {
+      profiles. innerHTML = "<p style='color:white; text-align:center;'>No contacts found</p>";
     }
   });
 }
-
 // Call on page load
 fetchAllContacts();
+function lmsg(Phone,t_msg,l_seen){
+  const tmsg = ref(db, "Accounts/" + phone + "/Contact/"+Phone+"/Chats/");
+  onValue(tmsg, (snapshot) => {
+ // Clear previous contacts
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      console.log(data)
+      Object.keys(data).forEach((key) => {
+        const Tmsg= data[key];
+        t_msg.innerHTML = Tmsg.text;
+       let Timestamp= new Date(Tmsg.timestamp);
+        l_seen.innerHTML=Timestamp.toLocaleTimeString([],{
+          hour:'2-digit',
+          minute:'2-digit',
+          hour12:true
+        });
+      });
+    } 
+    else {
+      console.log("<p style='color:white; text-align:center;'>No contacts found</p>");
+    }
+  });
+} 
 
 // Activate search bar functionality
 searchbar.addEventListener('input', (e) => {
